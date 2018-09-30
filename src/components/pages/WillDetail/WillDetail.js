@@ -19,9 +19,11 @@ class WillDetail extends Component {
   }
 
   componentDidMount() {
+    const { params } = this.props.match;
+    const publicKey = params.id;
     axios.get(`${API_ROOT}/user`, {
       params: {
-        public_key: sessionStorage.getItem('dapp_public_key'),
+        public_key: publicKey,
       },
     }).then((response) => {
       this.setState({
@@ -31,7 +33,7 @@ class WillDetail extends Component {
 
     axios.get(`${API_ROOT}/will`, {
       params: {
-        public_key: sessionStorage.getItem('dapp_public_key'),
+        public_key: publicKey,
       },
     }).then((response) => {
       this.setState({

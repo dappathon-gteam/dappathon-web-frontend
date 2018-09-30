@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Row, Col, Label, Button,
 } from 'reactstrap';
@@ -62,7 +63,9 @@ class ListWill extends Component {
     return (
       <Col sm={12}>
         <div style={{ background: '#ffffff', padding: 20, marginBottom: 20 }}>
-          <h3>{testator.full_name}</h3>
+          <Link to={`/dashboard/will/${testator.public_key}`}>
+            <h3>{testator.full_name}</h3>
+          </Link>
           <Row>
             <Col sm="5">
               <Row>

@@ -71,7 +71,7 @@ class CreateWill extends Component {
         public_key: sessionStorage.getItem('dapp_public_key'),
       })).then(() => {
       message.success('Create successfully', 2.5, () => {
-        history.push('/dashboard/will/id');
+        history.push(`/dashboard/will/${sessionStorage.getItem('dapp_public_key')}`);
       });
     });
   }

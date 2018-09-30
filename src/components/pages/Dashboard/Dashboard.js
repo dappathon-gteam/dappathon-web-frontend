@@ -34,7 +34,7 @@ class Dashboard extends Component {
         public_key: sessionStorage.getItem('dapp_public_key'),
       },
     }).then(() => {
-      history.push('/dashboard/will/id');
+      history.push(`/dashboard/will/${sessionStorage.getItem('dapp_public_key')}`);
     });
   }
 
