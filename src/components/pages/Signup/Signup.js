@@ -161,6 +161,7 @@ class Signup extends Component {
                           className="avatar-uploader"
                           showUploadList={false}
                           action="//jsonplaceholder.typicode.com/posts/"
+                          accept="image/*"
                           // beforeUpload={beforeUpload}
                           onChange={this.handleFrontChange}
                         >
@@ -179,6 +180,7 @@ class Signup extends Component {
                           className="avatar-uploader"
                           showUploadList={false}
                           action="//jsonplaceholder.typicode.com/posts/"
+                          accept="image/*"
                           // beforeUpload={beforeUpload}
                           onChange={this.handleBackChange}
                         >
@@ -197,6 +199,7 @@ class Signup extends Component {
                           className="avatar-uploader"
                           showUploadList={false}
                           action="//jsonplaceholder.typicode.com/posts/"
+                          accept="image/*"
                           // beforeUpload={beforeUpload}
                           onChange={this.handleSelfieChange}
                         >

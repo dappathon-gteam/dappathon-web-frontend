@@ -16,6 +16,7 @@ class CreateWill extends Component {
     super();
 
     this.state = {
+      showVideo: false,
       willData: {
         location: '',
         estates_declaration: '',
@@ -76,7 +77,7 @@ class CreateWill extends Component {
   }
 
   render() {
-    const { userData } = this.state;
+    const { userData, showVideo } = this.state;
     return (
       <div>
         <Content style={{ padding: 20 }}>
@@ -161,10 +162,19 @@ class CreateWill extends Component {
                   <FormGroup row>
                     <Label for="exampleFile" sm={2}>Recorded video</Label>
                     <Col sm={10}>
-                      <Input type="file" name="file" id="exampleFile" />
-                      <FormText color="muted">
-                        You need to record a video
-                      </FormText>
+                      <Input type="file" name="file" id="exampleFile" accept="video/*" onChange={() => {
+                        this.setState({ showVideo: true });
+                      }} />
+                      {!showVideo && (
+                        <FormText color="muted">
+                          You need to record a video
+                        </FormText>
+                      )}
+                      {showVideo && (
+                        <video width="320" height="240" controls>
+                          <source src="https://r4---sn-a5msen76.googlevideo.com/videoplayback?itag=18&source=youtube&fvip=1&requiressl=yes&sparams=clen,dur,ei,expire,gir,id,ip,ipbits,itag,lmt,mime,mip,mm,mn,ms,mv,pl,ratebypass,requiressl,source&ipbits=0&ip=207.246.81.208&id=o-AL8vRpEvOAmLi6wgJMGBbRQCfuYDsd3LGtckUEhTddZP&pl=19&ei=5SywW-ndMePw8gSIxL_ACg&expire=1538294086&c=WEB&key=cms1&mime=video%2Fmp4&signature=2F46A3F3766D975404A0749CE9C114CEBA23635A.5CECF13E11C29068793249898EC4186745936D29&ratebypass=yes&gir=yes&clen=24707183&dur=442.967&lmt=1450089914304535&title=How+to+record+a+self+taped+audition&title=How+to+record+a+self+taped+audition&mip=14.169.188.19&cm2rm=sn-8qj-nboek7z,sn-i3b6s7z&fexp=23763603&req_id=14338c620aada3ee&redirect_counter=2&cms_redirect=yes&mm=34&mn=sn-a5msen76&ms=ltu&mt=1538272473&mv=m" type="video/mp4" />
+                        </video>
+                      )}
                     </Col>
                   </FormGroup>
                   <FormGroup row>

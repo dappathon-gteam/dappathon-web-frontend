@@ -44,17 +44,17 @@ class Dashboard extends Component {
       <div>
         <Content>
           <div style={styles.greeting}>
-            <h1>{userData.full_name}</h1>
-            <p>Protect your loved ones with a legally binding will</p>
+            <h1>{`Hello ${userData.full_name}!`}</h1>
+            <p style={{ fontSize: 24 }}>Protect your loved ones with a legally binding will</p>
             <img
-              width="100"
-              height="100"
-              style={{ borderRadius: 100 }}
+              width="120"
+              height="120"
+              style={{ borderRadius: 120, marginTop: 25, marginBottom: 25 }}
               src="https://images-na.ssl-images-amazon.com/images/I/51mIsusDzGL._SX353_BO1,204,203,200_.jpg"
               alt=""
             />
             <br />
-            <Link to="/dashboard/create-will" className="btn btn-primary">Start my last will</Link>
+            <Link style={{ fontSize: 20 }} to="/dashboard/create-will" className="btn btn-primary">Start my last will</Link>
           </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>
