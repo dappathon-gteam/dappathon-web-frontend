@@ -26,7 +26,7 @@ class Signin extends Component {
               </FormGroup>
               <Button style={styles.buttonSubmit}>Submit</Button>
               <p style={styles.message} className="float-right">
-                Don't have an account?
+                Don&apos;t have an account?
                 <span>&nbsp;</span>
                 <Link to="/auth/sign-up" style={{ color: '#39898a' }}>Sign up here</Link>
               </p>

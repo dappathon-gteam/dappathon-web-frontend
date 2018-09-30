@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Layout } from 'antd';
-import history from "../../../services/history";
+import API_ROOT from '../../../config';
+import history from '../../../services/history';
 
 const {
-  Header, Content, Footer,
+  Content, Footer,
 } = Layout;
 
 class Dashboard extends Component {
@@ -18,7 +19,7 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://192.168.1.20:8888/user', {
+    axios.get(`${API_ROOT}/user`, {
       params: {
         public_key: sessionStorage.getItem('dapp_public_key'),
       },
@@ -26,6 +27,14 @@ class Dashboard extends Component {
       this.setState({
         userData: response.data.data,
       });
+    });
+
+    axios.get(`${API_ROOT}/will`, {
+      params: {
+        public_key: sessionStorage.getItem('dapp_public_key'),
+      },
+    }).then(() => {
+      history.push('/dashboard/will/id');
     });
   }
 
@@ -49,7 +58,7 @@ class Dashboard extends Component {
           </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>
-          Ant Design ©2018 Created by Ant UED
+          Trust Will ©2018 Created by G-Team
         </Footer>
       </div>
     );

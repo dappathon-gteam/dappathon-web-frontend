@@ -1,6 +1,6 @@
-import React, { Component } from 'react' ;
+import React, { Component } from 'react';
 import axios from 'axios';
-import { Upload } from 'antd';
+import { Upload, message } from 'antd';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
@@ -8,6 +8,7 @@ import {
 } from 'reactstrap';
 import AddButton from '../../common/AddButton/AddButton';
 import history from '../../../services/history';
+import API_ROOT from '../../../config';
 
 function getBase64(img, callback) {
   const reader = new FileReader();
@@ -24,7 +25,7 @@ class Signup extends Component {
       frontUrl: '',
       backUrl: '',
       selfieUrl: '',
-      loading: false,
+      disableSubmit: false,
 
       formData: {
         public_key: '',
@@ -57,9 +58,15 @@ class Signup extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    axios.post('http://192.168.1.20:8888/register', this.state.formData).then((response) => {
-      sessionStorage.setItem('dapp_public_key', this.state.formData.public_key);
-      history.push('/dashboard');
+    this.setState({
+      disableSubmit: true,
+    }, () => {
+      axios.post(`${API_ROOT}/register`, this.state.formData).then((response) => {
+        sessionStorage.setItem('dapp_public_key', this.state.formData.public_key);
+        message.success('Successfully registered', 3, () => {
+          history.push('/dashboard');
+        });
+      });
     });
   }
 
@@ -90,7 +97,9 @@ class Signup extends Component {
   }
 
   render() {
-    const { step, frontUrl, backUrl, selfieUrl } = this.state;
+    const {
+      step, frontUrl, backUrl, selfieUrl, disableSubmit,
+    } = this.state;
     return (
       <Row>
         <Col xs="12" md={{ size: 4, offset: 4 }}>
@@ -207,7 +216,7 @@ class Signup extends Component {
                 <Button type="button" style={styles.buttonSubmit} onClick={this.handleNextStep}>Next</Button>
               )}
               {step === 2 && (
-                <Button type="submit" style={styles.buttonSubmit}>Submit</Button>
+                <Button type="submit" style={styles.buttonSubmit} disabled={disableSubmit}>Submit</Button>
               )}
               <p style={styles.message} className="float-right">
                 Already have an account?

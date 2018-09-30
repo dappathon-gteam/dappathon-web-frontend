@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { Row, Col, Form, FormGroup, Label, Button, Input, FormText } from 'reactstrap';
-import { Layout } from 'antd';
+import {
+  Row, Col, Form, FormGroup, Label, Button, Input, FormText,
+} from 'reactstrap';
+import { Layout, message } from 'antd';
 import axios from 'axios';
 import history from '../../../services/history';
+import API_ROOT from '../../../config';
 
 const {
   Content, Footer,
@@ -17,6 +20,7 @@ class CreateWill extends Component {
         location: '',
         estates_declaration: '',
         last_will_statement: '',
+        video: 'https://r4---sn-a5msen76.googlevideo.com/videoplayback?itag=18&source=youtube&fvip=1&requiressl=yes&sparams=clen,dur,ei,expire,gir,id,ip,ipbits,itag,lmt,mime,mip,mm,mn,ms,mv,pl,ratebypass,requiressl,source&ipbits=0&ip=207.246.81.208&id=o-AL8vRpEvOAmLi6wgJMGBbRQCfuYDsd3LGtckUEhTddZP&pl=19&ei=5SywW-ndMePw8gSIxL_ACg&expire=1538294086&c=WEB&key=cms1&mime=video%2Fmp4&signature=2F46A3F3766D975404A0749CE9C114CEBA23635A.5CECF13E11C29068793249898EC4186745936D29&ratebypass=yes&gir=yes&clen=24707183&dur=442.967&lmt=1450089914304535&title=How+to+record+a+self+taped+audition&title=How+to+record+a+self+taped+audition&mip=14.169.188.19&cm2rm=sn-8qj-nboek7z,sn-i3b6s7z&fexp=23763603&req_id=14338c620aada3ee&redirect_counter=2&cms_redirect=yes&mm=34&mn=sn-a5msen76&ms=ltu&mt=1538272473&mv=m',
         witness_1: '',
         witness_2: '',
       },
@@ -28,7 +32,7 @@ class CreateWill extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://192.168.1.20:8888/user', {
+    axios.get(`${API_ROOT}/user`, {
       params: {
         public_key: sessionStorage.getItem('dapp_public_key'),
       },
@@ -58,11 +62,16 @@ class CreateWill extends Component {
         public_key: this.state.willData.witness_2,
       },
     ];
-    axios.post('http://192.168.1.20:8888/will/create', Object.assign(
+    axios.post(`${API_ROOT}/will/create`, Object.assign(
       {},
       this.state.willData,
-      { witnesses, public_key: sessionStorage.getItem('dapp_public_key') })).then((response) => {
-      history.push('/dashboard/will/id');
+      {
+        witnesses,
+        public_key: sessionStorage.getItem('dapp_public_key'),
+      })).then(() => {
+      message.success('Create successfully', 2.5, () => {
+        history.push('/dashboard/will/id');
+      });
     });
   }
 
@@ -181,17 +190,11 @@ class CreateWill extends Component {
           </Row>
         </Content>
         <Footer style={{ textAlign: 'center' }}>
-          Ant Design ©2018 Created by Ant UED
+          Trust Will ©2018 Created by G-Team
         </Footer>
       </div>
     );
   }
 }
-
-const styles = {
-  greeting: {
-    display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', height: '100vh',
-  },
-};
 
 export default CreateWill;

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import { Icon, Layout, Menu } from 'antd';
 import { Route, Link } from 'react-router-dom';
 import ListWill from '../../pages/ListWill/ListWill';
 import CreateWill from '../../pages/CreateWill/CreateWill';
 import WillDetail from '../../pages/WillDetail/WillDetail';
 import Dashboard from '../../pages/Dashboard/Dashboard';
-import { Icon, Layout, Menu } from 'antd';
 
 const {
   Sider,
